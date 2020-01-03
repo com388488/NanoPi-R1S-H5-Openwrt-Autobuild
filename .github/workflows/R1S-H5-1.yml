@@ -12,9 +12,9 @@
 name: NanoPi-R1S H5 官方内核-原版h5.xml
 
 on:
-  push:
-    branches: 
-      - master
+  # push:
+  #   branches: 
+  #     - master
   # schedule:
   #     - cron: 0 8 * * 5
   release:
