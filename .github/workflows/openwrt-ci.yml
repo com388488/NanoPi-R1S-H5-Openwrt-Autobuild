@@ -7,15 +7,15 @@
 name: NanoPi R1S-H5 OpenWrt Autobuild
 
 on:
-  # release:
-  #   types: [published]
+  release:
+    types: [published]
   # push:
   #   branches:
   #    - master
   #  paths:
   #    - ".config"
-   schedule:
-     - cron: 0 8 * * 5
+  #  schedule:
+  #    - cron: 0 8 * * 5
   # watch:
   #  types: [started]
 
