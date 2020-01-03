@@ -9,15 +9,15 @@ name: NanoPi R1S-H5 OpenWrt Autobuild
 on:
   release:
     types: [published]
-  push:
-    branches:
-      - master
-    paths:
-      - ".config"
+  # push:
+  #   branches:
+  #     - master
+  #   paths:
+  #     - ".config"
   #  schedule:
   #    - cron: 0 8 * * 5
-  watch:
-    types: [started]
+  # watch:
+  #   types: [started]
 
 jobs:
   build:
@@ -68,28 +68,12 @@ jobs:
           cd friendlywrt-h5/friendlywrt
           cp -r ../../lede/package/lean package/
           sed -i 's/https:\/\/git.openwrt.org\/project\/luci.git;openwrt-18.06/https:\/\/github.com\/coolsnowwolf\/luci/' feeds.conf.default
-          echo -e "\nsrc-git lienol https://github.com/Lienol/openwrt-package" >> feeds.conf.default
           sed -i 's/dnsmasq /dnsmasq-full luci/' include/target.mk
 
       - name: Update and install feeds
         run: |
           cd friendlywrt-h5/friendlywrt
-          ./scripts/feeds clean
           ./scripts/feeds update -a
-          rm -rf feeds/lienol/lienol/v2ray
-          rm -rf feeds/lienol/lienol/openssl1.1
-          rm -rf feeds/lienol/lienol/trojan
-          rm -rf feeds/lienol/lienol/ipt2socks
-          rm -rf feeds/lienol/lienol/shadowsocks-libev-new
-          rm -rf feeds/lienol/lienol/shadowsocksr-libev
-          rm -rf feeds/lienol/lienol/pdnsd-alt
-          rm -rf feeds/lienol/package/verysync
-          rm -rf feeds/lienol/lienol/luci-app-verysync
-          rm -rf package/lean/kcptun
-          rm -rf package/lean/luci-app-kodexplorer
-          rm -rf package/lean/luci-app-pppoe-relay
-          rm -rf package/lean/luci-app-pptp-server
-          rm -rf package/lean/luci-app-v2ray-server
           ./scripts/feeds install -a
 
       - name: SSH connection to Actions
