@@ -76,14 +76,15 @@ jobs:
           ./scripts/feeds update -a
           ./scripts/feeds install -a
 
+      - name: Costom Configure File
+        run: |
+          cd friendlywrt-h5/friendlywrt
+          rm -f ./.config*
+          wget https://raw.githubusercontent.com/ggsjj/NanoPi-R1S-Build-By-Actions/master/new-r1s-h5-config
+          cp new-r1s-h5-config .config
+
       - name: SSH connection to Actions
         uses: P3TERX/debugger-action@master
-
-      - name: Backup step, only run if previous step status check is failure
-        if: failure()
-        run: |
-          [ -e friendlywrt-h5/friendlywrt/.config ] || cp NanoPi-R1S-H5.config friendlywrt-h5/friendlywrt/.config
-          cat friendlywrt-h5/friendlywrt/.config
 
       - name: Download package
         if: always()
